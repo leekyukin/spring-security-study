@@ -28,12 +28,12 @@ public class HomeController {
         return "loginForm";
     }
 
+
     @GetMapping("/access-denied")
     public String accessDenied(){
         return "AccessDenied";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     @GetMapping("/user-page")
     public String userPage(){
         return "UserPage";
@@ -46,7 +46,7 @@ public class HomeController {
     }
 
 
-    @ResponseBody
+    @ResponseBody   // json 객체로 리턴하기 위함
     @GetMapping("/auth")
     public Authentication auth(){
         return SecurityContextHolder.getContext().getAuthentication();
