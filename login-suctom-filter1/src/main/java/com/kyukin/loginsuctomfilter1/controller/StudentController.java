@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/student")
 public class StudentController {
 
-    @PreAuthorize(("hasAnyAuthority('ROLE_STUDENT')"))
+    @PreAuthorize("hasAnyAuthority('ROLE_STUDENT')")
     @GetMapping("/main")
     public String main() {
         return "StudentMain";

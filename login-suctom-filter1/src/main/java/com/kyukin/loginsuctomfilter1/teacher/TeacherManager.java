@@ -1,4 +1,4 @@
-package com.kyukin.loginsuctomfilter1.student;
+package com.kyukin.loginsuctomfilter1.teacher;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 @Component
-public class StudentManager implements AuthenticationProvider, InitializingBean {
+public class TeacherManager implements AuthenticationProvider, InitializingBean {
     // provider 가 될 객체
 
-    // inMemoryDB     id    student
-    private HashMap<String, Student> studentDB = new HashMap<>();
+    // inMemoryDB     id    Teacher
+    private HashMap<String, Teacher> teacherDB = new HashMap<>();
 
 
     // token 발행하기
@@ -27,11 +27,11 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
         UsernamePasswordAuthenticationToken token =
                 (UsernamePasswordAuthenticationToken) authentication;
         // DB의 아이디가 토큰에 name 과 같다면
-        if(studentDB.containsKey(token.getName())) {
-            Student student = studentDB.get(token.getName());
-            return StudentAuthenticationToken.builder()
-                    .principal(student)
-                    .details(student.getUsername())
+        if(teacherDB.containsKey(token.getName())) {
+            Teacher teacher = teacherDB.get(token.getName());
+            return TeacherAuthenticationToken.builder()
+                    .principal(teacher)
+                    .details(teacher.getUsername())
                     .authenticated(true)
                     .build();
         }
@@ -46,29 +46,15 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
     @Override
     public void afterPropertiesSet() throws Exception {
         Set.of(
-                new Student(
-                        "hong",
-                        "홍길동",
+                new Teacher(
+                        "choi",
+                        "최선",
                         Set.of(
-                                new SimpleGrantedAuthority("ROLE_STUDENT")
-                        )
-                ),
-                new Student(
-                        "Kang",
-                        "강아지",
-                        Set.of(
-                                new SimpleGrantedAuthority("ROLE_STUDENT")
-                        )
-                ),
-                new Student(
-                        "rang",
-                        "호랑이",
-                        Set.of(
-                                new SimpleGrantedAuthority("ROLE_STUDENT")
+                                new SimpleGrantedAuthority("ROLE_TEACHER")
                         )
                 )
-        ).forEach(s->
-                studentDB.put(s.getId(), s)
+        ).forEach(t->
+                teacherDB.put(t.getId(), t)
         );
     }
 }
