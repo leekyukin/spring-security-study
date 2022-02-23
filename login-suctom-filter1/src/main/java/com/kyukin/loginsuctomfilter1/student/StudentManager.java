@@ -19,16 +19,16 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
     private HashMap<String, Student> studentDB = new HashMap<>();
 
 
-    // token 발행하기
+    // token(통행증) 발행하기
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
 
-        UsernamePasswordAuthenticationToken token =
-                (UsernamePasswordAuthenticationToken) authentication;
+        StudentAuthenticationToken token =
+                (StudentAuthenticationToken) authentication;
         // DB의 아이디가 토큰에 name 과 같다면
-        if(studentDB.containsKey(token.getName())) {
-            Student student = studentDB.get(token.getName());
+        if(studentDB.containsKey(token.getCredentials())) {
+            Student student = studentDB.get(token.getCredentials());
             return StudentAuthenticationToken.builder()
                     .principal(student)
                     .details(student.getUsername())
@@ -40,7 +40,7 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication == UsernamePasswordAuthenticationToken.class;
+        return authentication == StudentAuthenticationToken.class;
     }
 
     @Override

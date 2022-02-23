@@ -1,5 +1,7 @@
 package com.kyukin.loginsuctomfilter1.config;
 
+import com.kyukin.loginsuctomfilter1.student.StudentAuthenticationToken;
+import com.kyukin.loginsuctomfilter1.teacher.TeacherAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,7 +27,19 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
         username = username.trim();
         String password = obtainPassword(request);
         password = (password != null) ? password : "";
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
-        return this.getAuthenticationManager().authenticate(authRequest);
+
+        // 여기서부터 커스텀
+        String type = request.getParameter("type"); // html 의 radio 의 값을 받아옴
+        if (type == null || !type.equals("teacher")) {
+            // student
+            StudentAuthenticationToken token = StudentAuthenticationToken.builder()
+                    .credentials(username).build();
+            return this.getAuthenticationManager().authenticate(token);
+        } else {
+            // teacher
+            TeacherAuthenticationToken token = TeacherAuthenticationToken.builder()
+                    .credentials(username).build();
+            return this.getAuthenticationManager().authenticate(token);
+        }
     }
 }

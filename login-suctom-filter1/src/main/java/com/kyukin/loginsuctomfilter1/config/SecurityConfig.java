@@ -36,16 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests(request->
                         request
-                                .antMatchers("/").permitAll()
+                                .antMatchers("/", "/login").permitAll()
                                 .anyRequest().authenticated()
                 )
 // 기본 로그인 페이지
-//                .formLogin(
-//                        login->login.loginPage("/login")
-//                                .permitAll()
-//                                .defaultSuccessUrl("/", false)
-//                                .failureUrl("/login-error")
-//                )
+                .formLogin(
+                        login->login.loginPage("/login")
+                                .permitAll()
+                                .defaultSuccessUrl("/", false)
+                                .failureUrl("/login-error")
+                )
                 .addFilterAt(filter, UsernamePasswordAuthenticationFilter.class) // custom 한 필터 넣어주기
                 .logout(logout->logout.logoutSuccessUrl("/"))
                 .exceptionHandling(exception->exception.accessDeniedPage("/access-denied"))
