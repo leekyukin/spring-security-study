@@ -72,10 +72,11 @@ chrome 개발자 모드로 form 태그를 살펴보면 다음줄에
 ```java
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
+        web.ignoring() // 보안 
                 .requestMatchers(
                         PathRequest.toStaticResources().atCommonLocations()
                         // css, js, images, webjars, favicon 등이 포함되어 있다.
+                        PathRequest.toH2Console() // h2 DB console
                 )
                 ;
     }   
