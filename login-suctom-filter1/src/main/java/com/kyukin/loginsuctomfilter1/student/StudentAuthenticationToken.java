@@ -16,6 +16,7 @@ import java.util.HashSet;
 public class StudentAuthenticationToken implements Authentication {
 // 학생의 통행증 역할
 
+    // Authentication 을 상속 받음으로서 통행증 역할을 할 수 있다.
 
     private Student principal;  // 주요한
     private String credentials; // 신분증

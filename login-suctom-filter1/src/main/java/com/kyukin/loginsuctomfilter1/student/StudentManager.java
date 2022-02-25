@@ -13,17 +13,20 @@ import java.util.Set;
 
 @Component
 public class StudentManager implements AuthenticationProvider, InitializingBean {
-    // provider 가 될 객체
+    // 인증 제공자(AuthenticationProvider) 가 될 객체
 
     // inMemoryDB     id    student
     private HashMap<String, Student> studentDB = new HashMap<>();
 
 
     // token(통행증) 발행하기
+    // AuthenticationProvider 는 authenticate() 을 통해서 Authentication 을
+    // 받아서 인증하고 Authentication 에 담아서 다시 객체로 반환한다.
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
 
+        // authenticate() 의 관심 대상을 Custom 한 Token 으로 형변환
         StudentAuthenticationToken token =
                 (StudentAuthenticationToken) authentication;
         // DB의 아이디가 토큰에 name 과 같다면
@@ -36,8 +39,11 @@ public class StudentManager implements AuthenticationProvider, InitializingBean 
                     .build();
         }
         return null;
+        // 인증 실패시 null 반환
     }
 
+    // AuthenticationProvider 가 관심을 갖고 있는 대상은
+    // StudentAuthenticationToken 와 같은지 확인하는 메서드
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication == StudentAuthenticationToken.class;
