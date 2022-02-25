@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         login.loginPage("/login")
                                 .permitAll()
                                 .loginProcessingUrl("/loginprocess")
+                                // 로그인 form 의 action 과 일치시켜주어야 한다.
                                 .defaultSuccessUrl("/",false)
                                 .failureUrl("/login-error")
                 )
