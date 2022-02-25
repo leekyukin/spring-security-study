@@ -1,5 +1,6 @@
 package com.kyukin.loginmultichain.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,8 @@ public class Student {
 
     private String id;
     private String username;
+
+    @JsonIgnore // json 으로 하기 힘듬
     private Set<GrantedAuthority> role;
 
     private String teacherId;
