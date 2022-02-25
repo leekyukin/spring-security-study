@@ -106,6 +106,7 @@ chrome 개발자 모드로 form 태그를 살펴보면 다음줄에
                                 // 로그인 페이지 로 가려면 로그인 받고 오라고 하기 때문에
                                 // 무한 루프에 빠질 수 있다.
                                 // 그래서 로그인 페이지는 꼭 permitAll() 을 해주어야한다.
+                                .loginProcessingUrl("/loginprocess")
                                 .defaultSuccessUrl("/", false)
                                 // alwaysUse : 로그인 하기 전에 다른 페이지에 들어갔다가 권한이 필요해서 로그인 페이지로 튕겨서 로그인을 했을 떄
                                 // alwaysUse 가 true 면 항상 지정된 페이지(여기서는 "/") 로 가고, false 면 유동적으로 로그인 페이지 이전에 가장 최근으로 들어갔던
@@ -131,6 +132,7 @@ chrome 개발자 모드로 form 태그를 살펴보면 다음줄에
     - **formLogin()** : 로그인 페이지를 지정해주지 않으면 DefaultLoginPageGeneratingFilter와 DefaultLogoutGeneratingFilter가 동시에 동작하게 된다.
         - **defaultSuccessUrl()** : 위 주석 대로 ~
         - **failureUrl()** : 로그인 실패시 디자인된 로그인 에러 페이지로 이동
+        - **loginProcessingUrl()** : html의 로그인 form의 action과 일치시키주어야 한다.
 
 
 
