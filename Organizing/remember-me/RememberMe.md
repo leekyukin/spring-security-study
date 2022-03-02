@@ -8,3 +8,16 @@
 
 <img src="img/token.png" width="600px">
 
+### remember-me 토큰 : dXNlcjE6...   
+
+### 디코드 : user1:1647440775465:f02a2705dc561b9b55be066dfff61be5
+
+<hr>
+
+|아이디|만료시간|서면값|
+|-|-|-|
+|user1|1647440775465|f02a2705dc561b9b55be066dfff61be5|
+
+<hr>
+
+<img src="img/BASE64.png" width="600px">
