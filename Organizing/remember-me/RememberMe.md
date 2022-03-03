@@ -6,11 +6,11 @@
 
 ## 개발자 도구에서 일반 토큰과 remember-me 토큰 보기
 
-<img src="img/token.png" width="600px">
+<img src="../img/token.png" width="600px">
 
-### remember-me 토큰 : dXNlcjE6...   
+### **remember-me 토큰** : dXNlcjE6...   
 
-### 디코드 : user1:1647440775465:f02a2705dc561b9b55be066dfff61be5
+### **디코드** : user1:1647440775465:f02a2705dc561b9b55be066dfff61be5
 
 <hr>
 
@@ -20,4 +20,6 @@
 
 <hr>
 
-<img src="img/BASE64.png" width="600px">
+<img src="../img/BASE64.png" width="600px">
+
+위 사이트에서 확인가능하다.
