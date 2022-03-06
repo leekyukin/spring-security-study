@@ -1,5 +1,6 @@
 package com.security.loginrememberme.config;
 
+
 import com.security.loginrememberme.domain.SpUser;
 import com.security.loginrememberme.service.SpUserService;
 import org.springframework.beans.factory.InitializingBean;
