@@ -24,7 +24,4 @@ public class SpAuthority implements GrantedAuthority {
 
     @Id
     private String authority;
-
-
-
 }
