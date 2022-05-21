@@ -26,11 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ;
         http
                 .formLogin()
-                // .loginPage("/loginPage")  // security 에서 제공하는 from login 페이지 이외 개발자가 개별적으로 만든 페이지 매핑
-                .defaultSuccessUrl("/") // 로그인 성공시 이동할 url
-                .failureUrl("/login") // 로그인 실패시 이동할 url
-                .usernameParameter("userid")    // user 필드명 재설정
-                .passwordParameter("passwd")    // 비밀번호 필드명 재설정
+                // .loginPage("/loginPage")  // security 에서 제공하는 로그인 페이지 이외 사용자 정의 로그인 페이지
+                .defaultSuccessUrl("/") // 로그인 성공 후 이동할 url
+                .failureUrl("/login") // 로그인 실패 후 이동할 url
+                .usernameParameter("userid")    // 아이디 파라미터명 설정
+                .passwordParameter("passwd")    // 비밀번호 필드명 설정
                 .loginProcessingUrl("/login_proc")   // from 태그의 action url 변경 | default : login
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
