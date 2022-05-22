@@ -26,7 +26,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,8 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
         ;
         http
-                .rememberMe()
-                .userDetailsService(userDetailsService)
+                .sessionManagement()
+                .maximumSessions(1)     // 최대 허용 세션 수, -1 무제한 로그인 세션 허용
+                .maxSessionsPreventsLogin(false)     // 동시로그인 차단, false : 기존 세션 만료(default 값)
         ;
 
     }
