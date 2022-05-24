@@ -1,25 +1,10 @@
 package com.study.inflearnsecurity;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -39,8 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
         http
                 .sessionManagement()
-                .maximumSessions(1)     // 최대 허용 세션 수, -1 무제한 로그인 세션 허용
-                .maxSessionsPreventsLogin(false)     // 동시로그인 차단, false : 기존 세션 만료(default 값)
+                .sessionFixation().none() // 기본값 // 접속할때마다 새로운 세션 발급, 서블릿 3.1 이상에서 기본값
+                                                     // none : 새로 생성하지 않음, 공격당함
+                                                     // migrateSession : 서블릿 3.1 이하에서 기본값, changeSessionId()와 같음
+                                                     // newSession : JSESSIONID 가 새로 발급되지만 이전 세션에서 설정한 속성값은 초기화 된다.
         ;
 
     }
