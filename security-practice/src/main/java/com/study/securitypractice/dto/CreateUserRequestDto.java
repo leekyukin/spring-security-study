@@ -21,7 +21,7 @@ public class CreateUserRequestDto {
                 .email(email)
                 .name(name)
                 .password(passwordEncoder.encode(password))
-                .authority(Authority.ROLE_USER)
+                .authority(Authority.USER)
                 .build();
     }
 }

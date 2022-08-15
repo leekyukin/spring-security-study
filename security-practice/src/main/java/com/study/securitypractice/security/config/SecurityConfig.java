@@ -2,9 +2,11 @@ package com.study.securitypractice.security.config;
 
 import com.study.securitypractice.security.jwt.JwtAuthenticationFilter;
 import com.study.securitypractice.security.jwt.JwtProvider;
+import com.study.securitypractice.user.domain.Authority;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/role/user").access("hasAnyRole('USER')")
+                .anyRequest().permitAll();
+
     }
 
     @Bean
@@ -39,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManagerBean();

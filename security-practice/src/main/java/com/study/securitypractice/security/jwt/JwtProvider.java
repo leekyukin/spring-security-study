@@ -3,6 +3,7 @@ package com.study.securitypractice.security.jwt;
 import com.study.securitypractice.user.domain.Authority;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtProvider {
 
     private final String secretKey = "secret";
@@ -52,7 +54,8 @@ public class JwtProvider {
     // Request 의 Header 에서 token 값을 가져옵니다. "X-AUTH_TOKEN" : "TOKEN 값"
     public String resolveToken(HttpServletRequest request) {
         String token = null;
-        Cookie cookie = WebUtils.getCookie(request, "X-AUTH=TOKEN");
+        Cookie cookie = WebUtils.getCookie(request, "X-AUTH-TOKEN");
+        log.info("resolveToken-cookie : " + cookie);
         if (cookie != null) token = cookie.getValue();
         return token;
     }
