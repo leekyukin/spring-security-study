@@ -1,5 +1,6 @@
-package com.study.jwtstudy.domain.user.domain;
+package com.study.jwtstudy.domain.user.domain.repository;
 
+import com.study.jwtstudy.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.study.jwtstudy.domain.user.domain;
 
-import com.study.jwtstudy.domain.user.domain.Role;
+import com.study.jwtstudy.domain.user.domain.type.Role;
 import com.study.jwtstudy.global.entity.BaseTimeEntity;
 import lombok.Getter;
 
