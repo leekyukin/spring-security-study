@@ -4,6 +4,7 @@ import com.study.jwtstudy.global.auth.CustomUserDetailsService;
 import com.study.jwtstudy.global.jwt.JwtProperties;
 import com.study.jwtstudy.global.jwt.JwtTokenProvider;
 import com.study.jwtstudy.global.jwt.JwtValidateService;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private void setAuthentication(String token, HttpServletRequest request) {
+    private void setAuthentication(String token, HttpServletRequest request) throws ExpiredJwtException {
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtValidateService.getEmail(token));
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

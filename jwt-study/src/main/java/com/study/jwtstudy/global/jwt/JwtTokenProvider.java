@@ -1,6 +1,5 @@
 package com.study.jwtstudy.global.jwt;
 
-import com.study.jwtstudy.domain.user.domain.type.Role;
 import com.study.jwtstudy.global.config.redis.RedisService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -33,7 +32,7 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String email, List<Role> roles, long time) {
+    private String createToken(String email, List<String> roles, long time) {
         Claims claims = Jwts.claims();
         claims.put("email", email);
         claims.put("roles", roles);
@@ -47,11 +46,11 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    protected String createAccessToken(String email, List<Role> roles) {
+    public String createAccessToken(String email, List<String> roles) {
         return createToken(email, roles, JwtProperties.ACCESS_TOKEN_VALID_TIME);
     }
 
-    protected String createRefreshToken(String email, List<Role> roles) {
+    public String createRefreshToken(String email, List<String> roles) {
         return createToken(email, roles, JwtProperties.REFRESH_TOKEN_VALID_TIME);
     }
 
