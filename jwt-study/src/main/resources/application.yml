@@ -1,22 +1,15 @@
 spring:
-  config:
-    activate:
-      on-profile: local
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/jwt_test
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:33060/jwt_study?serverTimezone=UTC&characterEncoding=UTF-8
     username: jik
     password: jesusisking
-
-  redis:
-    host: localhost
-    port: 6379
 
   jpa:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
   security:
     jwt:
@@ -25,17 +18,6 @@ spring:
       blacklist:
         access-token: BlackList_AccessToken_
 
----
-spring:
-  config:
-    activate:
-      on-profile: test
-  jpa:
-    database: h2
-
-  security:
-    jwt:
-      header: Authorization
-      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-      blacklist:
-        access-token: BlackList_AccessToken_
+  redis:
+    host: localhost
+    port: 6379
