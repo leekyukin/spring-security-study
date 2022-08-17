@@ -2,23 +2,23 @@ version: '3'
 
 services:
   mysql:
-    container_name: mysql_jwt_test
+    container_name: mysql_jwt_study
     image: mysql/mysql-server:5.7
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_USER: "jik"
       MYSQL_PASSWORD: "jesusisking"
-      MYSQL_DATABASE: "jwt_test"
+      MYSQL_DATABASE: "jwt_study"
     ports:
-      - "3306:3306"
+      - "33060:3306"
     command:
       - "mysqld"
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
 
   redis:
-    image: redis:latest
-    container_name: jwt_study_redis
+    image: redis
+    container_name: redis_jwt_study
     hostname: jik
     command: redis-server --port 6379
     ports:
