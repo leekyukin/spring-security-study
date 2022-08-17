@@ -22,6 +22,6 @@ public class AuthController {
     public TokenResponseDto login(
             @RequestBody @Valid LoginRequestDto request
     ) {
-        return authService.login
+        return authService.login(request);
     }
 }
