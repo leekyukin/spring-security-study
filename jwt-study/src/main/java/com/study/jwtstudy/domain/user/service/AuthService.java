@@ -3,13 +3,12 @@ package com.study.jwtstudy.domain.user.service;
 import com.study.jwtstudy.domain.user.controller.dto.LoginRequestDto;
 import com.study.jwtstudy.domain.user.controller.dto.TokenResponseDto;
 import com.study.jwtstudy.domain.user.domain.User;
-import com.study.jwtstudy.domain.user.domain.repository.UserRepository;
-import com.study.jwtstudy.domain.user.domain.type.Role;
 import com.study.jwtstudy.domain.user.facade.UserFacade;
 import com.study.jwtstudy.global.config.redis.RedisService;
+import com.study.jwtstudy.global.config.security.SecurityConfig;
+import com.study.jwtstudy.global.config.security.SecurityUtil;
 import com.study.jwtstudy.global.jwt.JwtProperties;
 import com.study.jwtstudy.global.jwt.JwtTokenProvider;
-import com.study.jwtstudy.global.jwt.JwtValidateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,5 +43,12 @@ public class AuthService {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    @Transactional
+    public void logout(String accessToken) {
+        User user = userFacade.findUserByEmail(SecurityUtil.getLoginUserEmail());
+
+        jwtTokenProvider.logout(user.getEmail(), accessToken);
     }
 }
