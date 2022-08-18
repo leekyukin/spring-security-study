@@ -1,23 +1,19 @@
-package com.study.jwtstudy.global.config;
+package com.study.jwtstudy.global.config.security;
 
 import com.study.jwtstudy.global.auth.CustomUserDetailsService;
 import com.study.jwtstudy.global.jwt.JwtTokenProvider;
 import com.study.jwtstudy.global.jwt.JwtValidateService;
 import com.study.jwtstudy.global.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.support.SessionStatus;
 
 @Configuration
 @RequiredArgsConstructor
